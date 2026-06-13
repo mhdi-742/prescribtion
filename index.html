@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PrescribeRx — Smart Prescription App for Doctors</title>
+  <meta name="description" content="Professional e-Prescription app for doctors. Create, manage, and print prescriptions with intelligent medicine search and Indian brand name support.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='80' font-size='80'>℞</text></svg>">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div id="app">
+
+    <!-- ======== TOP NAVIGATION ======== -->
+    <header id="app-header">
+      <div class="header-left">
+        <span class="app-logo">℞</span>
+        <h1 class="app-name">PrescribeRx</h1>
+      </div>
+      <nav class="header-nav">
+        <button data-view="dashboard" class="nav-btn active" id="nav-dashboard">
+          <i>🏠</i> <span>Dashboard</span>
+        </button>
+        <button data-view="editor" class="nav-btn" id="nav-editor">
+          <i>📝</i> <span>New Rx</span>
+        </button>
+        <button data-view="medicines" class="nav-btn" id="nav-medicines">
+          <i>💊</i> <span>Medicines</span>
+        </button>
+        <button data-view="settings" class="nav-btn" id="nav-settings">
+          <i>⚙️</i> <span>Settings</span>
+        </button>
+      </nav>
+    </header>
+
+    <!-- ======== DASHBOARD VIEW ======== -->
+    <section id="view-dashboard" class="view active">
+      <div class="dashboard-header">
+        <h2>Welcome, <span id="doctor-name-display">Doctor</span></h2>
+        <button id="btn-new-rx" class="btn-primary btn-large">+ New Prescription</button>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <span class="stat-number" id="stat-total">0</span>
+          <span class="stat-label">Total Prescriptions</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number" id="stat-today">0</span>
+          <span class="stat-label">Today</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number" id="stat-patients">0</span>
+          <span class="stat-label">Unique Patients</span>
+        </div>
+      </div>
+
+      <div class="recent-section">
+        <h3>Recent Prescriptions</h3>
+        <div id="recent-prescriptions" class="recent-grid">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ======== PRESCRIPTION EDITOR VIEW ======== -->
+    <section id="view-editor" class="view">
+      <div class="editor-toolbar">
+        <button id="btn-back" class="btn-ghost">← Back to Dashboard</button>
+        <div class="toolbar-actions">
+          <button id="btn-clear" class="btn-ghost">🗑 Clear</button>
+          <button id="btn-save" class="btn-secondary">💾 Save</button>
+          <button id="btn-print" class="btn-primary">🖨 Print</button>
+        </div>
+      </div>
+
+      <!-- THE PRESCRIPTION PAD -->
+      <div class="prescription-pad" id="prescription-pad">
+
+        <!-- LEFT PANEL — Clinic Sidebar -->
+        <aside class="clinic-panel">
+          <div class="clinic-header">
+            <div class="clinic-logo-area">
+              <span class="clinic-logo-icon">🏥</span>
+              <div>
+                <input type="text" class="edit-field clinic-name" id="rx-clinic-name" value="" placeholder="Hospital / Clinic Name">
+                <input type="text" class="edit-field clinic-tagline" id="rx-clinic-tagline" value="" placeholder="Your tagline here">
+              </div>
+            </div>
+          </div>
+
+          <!-- Doctor Info -->
+          <div class="clinic-section" id="doctor-section">
+            <div class="doctor-entry">
+              <input type="text" class="edit-field doctor-name" id="rx-doctor-name" value="" placeholder="Dr. Full Name">
+              <input type="text" class="edit-field doctor-spec" id="rx-doctor-spec" value="" placeholder="Specialization">
+              <input type="text" class="edit-field doctor-qual" id="rx-doctor-qual" value="" placeholder="MBBS, MD, etc.">
+              <input type="text" class="edit-field doctor-reg" id="rx-doctor-reg" value="" placeholder="Reg. No: XXXXX">
+            </div>
+          </div>
+
+          <!-- Timing -->
+          <div class="clinic-section">
+            <h4>Timing</h4>
+            <textarea class="edit-field" id="rx-timing" rows="4" placeholder="Mon - Fri&#10;9:00 AM - 1:00 PM&#10;5:00 PM - 8:00 PM&#10;&#10;Sat&#10;9:00 AM - 1:00 PM"></textarea>
+          </div>
+
+          <!-- Contact -->
+          <div class="clinic-section">
+            <h4>Contact</h4>
+            <input type="text" class="edit-field" id="rx-phone" placeholder="Phone number">
+            <input type="text" class="edit-field" id="rx-emergency" placeholder="Emergency number">
+            <input type="text" class="edit-field" id="rx-ambulance" placeholder="Ambulance number">
+          </div>
+
+          <!-- Address -->
+          <div class="clinic-section">
+            <h4>Address</h4>
+            <textarea class="edit-field" id="rx-address" rows="3" placeholder="Clinic address..."></textarea>
+          </div>
+        </aside>
+
+        <!-- RIGHT PANEL — Prescription Body -->
+        <main class="rx-body">
+          <!-- Date -->
+          <div class="rx-top-bar">
+            <div class="rx-date">
+              <label>Date:</label>
+              <input type="date" id="rx-date" class="edit-field">
+            </div>
+          </div>
+
+          <!-- Patient Info -->
+          <div class="patient-info">
+            <div class="patient-row">
+              <div class="patient-field">
+                <label>Name:</label>
+                <input type="text" id="rx-patient-name" class="edit-field" placeholder="Patient Full Name">
+              </div>
+              <div class="patient-field patient-field-small">
+                <label>Age:</label>
+                <input type="text" id="rx-patient-age" class="edit-field" placeholder="--">
+              </div>
+            </div>
+            <div class="patient-row">
+              <div class="patient-field patient-field-small">
+                <label>Sex:</label>
+                <select id="rx-patient-sex" class="edit-field">
+                  <option value="">Select</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              <div class="patient-field patient-field-small">
+                <label>Weight:</label>
+                <input type="text" id="rx-patient-weight" class="edit-field" placeholder="kg">
+              </div>
+              <div class="patient-field patient-field-small">
+                <label>Height:</label>
+                <input type="text" id="rx-patient-height" class="edit-field" placeholder="cm">
+              </div>
+            </div>
+          </div>
+
+          <!-- Vitals -->
+          <div class="rx-vitals">
+            <span class="rx-vitals-title">Vitals</span>
+            <div class="vital-field">
+              <label>BP:</label>
+              <input type="text" class="edit-field" id="rx-bp" placeholder="120/80">
+            </div>
+            <div class="vital-field">
+              <label>Pulse:</label>
+              <input type="text" class="edit-field" id="rx-pulse" placeholder="/min">
+            </div>
+            <div class="vital-field">
+              <label>Temp:</label>
+              <input type="text" class="edit-field" id="rx-temp" placeholder="°F">
+            </div>
+            <div class="vital-field">
+              <label>SpO2:</label>
+              <input type="text" class="edit-field" id="rx-spo2" placeholder="%">
+            </div>
+          </div>
+
+          <!-- Diagnosis -->
+          <div class="rx-diagnosis">
+            <label>Diagnosis / Chief Complaints:</label>
+            <textarea id="rx-diagnosis" class="edit-field" placeholder="Enter diagnosis or chief complaints..." rows="2"></textarea>
+          </div>
+
+          <!-- Rx Symbol -->
+          <div class="rx-symbol">℞</div>
+
+          <!-- Medicines Section -->
+          <div class="medicines-section">
+            <div id="medicine-list">
+              <!-- Medicine rows added dynamically by app.js -->
+            </div>
+            <button id="btn-add-medicine" class="btn-add-med">+ Add Medicine</button>
+          </div>
+
+          <!-- Advice -->
+          <div class="rx-advice">
+            <label>Advice / Instructions:</label>
+            <textarea id="rx-advice" class="edit-field" placeholder="Diet, rest, investigations, lifestyle advice..." rows="2"></textarea>
+          </div>
+
+          <!-- Follow-up -->
+          <div class="rx-followup">
+            <label>Follow-up:</label>
+            <input type="date" id="rx-followup" class="edit-field">
+          </div>
+
+          <!-- Signature & Footer -->
+          <div class="rx-footer">
+            <div class="rx-signature">
+              <div class="signature-line"></div>
+              <span>Doctor's Signature & Stamp</span>
+            </div>
+            <p class="rx-disclaimer">Not for Medico Legal Purpose</p>
+          </div>
+        </main>
+      </div>
+    </section>
+
+    <!-- ======== MEDICINE MANAGER VIEW ======== -->
+    <section id="view-medicines" class="view">
+      <div class="medicines-manager-header">
+        <h2>💊 Medicine Manager</h2>
+        <div class="med-manager-stats">
+          Base: <span id="med-count-base">0</span> &nbsp;|&nbsp;
+          Custom: <span id="med-count-custom">0</span> &nbsp;|&nbsp;
+          Total: <span id="med-count-total">0</span>
+        </div>
+      </div>
+
+      <!-- Add Custom Medicine Form -->
+      <div class="add-medicine-form">
+        <h3>➕ Add Custom Medicine</h3>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Brand Name *</label>
+            <input type="text" id="new-med-name" placeholder="e.g., Crocin">
+          </div>
+          <div class="form-group">
+            <label>Generic Name *</label>
+            <input type="text" id="new-med-generic" placeholder="e.g., Paracetamol">
+          </div>
+          <div class="form-group">
+            <label>Category *</label>
+            <input type="text" id="new-med-category" placeholder="e.g., Analgesic">
+          </div>
+          <div class="form-group">
+            <label>Dosage Forms</label>
+            <input type="text" id="new-med-forms" placeholder="Tab, Syp, Cap (comma sep)">
+          </div>
+          <div class="form-group">
+            <label>Strengths</label>
+            <input type="text" id="new-med-strengths" placeholder="500mg, 650mg (comma sep)">
+          </div>
+          <div class="form-group" style="display:flex;align-items:flex-end;">
+            <button id="btn-add-custom-med" class="btn-primary" style="width:100%;">Add Medicine</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Custom Medicine List -->
+      <h3 style="color:var(--text-secondary);margin-bottom:16px;">Your Custom Medicines</h3>
+      <div id="custom-med-list" class="custom-med-list">
+        <!-- Populated dynamically -->
+      </div>
+    </section>
+
+    <!-- ======== SETTINGS VIEW ======== -->
+    <section id="view-settings" class="view">
+      <div class="settings-header">
+        <h2>⚙️ Settings</h2>
+      </div>
+
+      <div class="settings-section">
+        <h3>🩺 Doctor Profile</h3>
+        <div class="settings-form-grid">
+          <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" id="set-doctor-name" placeholder="Dr. Full Name">
+          </div>
+          <div class="form-group">
+            <label>Qualifications</label>
+            <input type="text" id="set-doctor-qual" placeholder="MBBS, MD Medicine">
+          </div>
+          <div class="form-group">
+            <label>Specialization</label>
+            <input type="text" id="set-doctor-spec" placeholder="Consultant General Medicine">
+          </div>
+          <div class="form-group">
+            <label>Registration Number</label>
+            <input type="text" id="set-doctor-reg" placeholder="State Medical Council Reg No.">
+          </div>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <h3>🏥 Clinic Details</h3>
+        <div class="settings-form-grid">
+          <div class="form-group">
+            <label>Clinic / Hospital Name</label>
+            <input type="text" id="set-clinic-name" placeholder="City Hospital">
+          </div>
+          <div class="form-group">
+            <label>Tagline</label>
+            <input type="text" id="set-clinic-tagline" placeholder="Your health is our priority">
+          </div>
+          <div class="form-group full-width">
+            <label>Address</label>
+            <textarea id="set-clinic-address" rows="2" placeholder="Clinic full address..."></textarea>
+          </div>
+          <div class="form-group full-width">
+            <label>Timing</label>
+            <textarea id="set-clinic-timing" rows="3" placeholder="Mon - Fri: 9 AM - 1 PM, 5 PM - 8 PM&#10;Sat: 9 AM - 1 PM"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Phone</label>
+            <input type="text" id="set-clinic-phone" placeholder="Phone number">
+          </div>
+          <div class="form-group">
+            <label>Emergency Number</label>
+            <input type="text" id="set-clinic-emergency" placeholder="Emergency contact">
+          </div>
+          <div class="form-group">
+            <label>Ambulance Number</label>
+            <input type="text" id="set-clinic-ambulance" placeholder="Ambulance number">
+          </div>
+        </div>
+      </div>
+
+      <div class="settings-actions">
+        <button id="btn-save-settings" class="btn-primary">💾 Save Settings</button>
+        <button id="btn-reset-settings" class="btn-danger">🗑 Reset All Data</button>
+      </div>
+    </section>
+
+  </div><!-- end #app -->
+
+  <!-- ======== TOAST CONTAINER ======== -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- ======== FIRST-TIME SETUP MODAL ======== -->
+  <div class="modal-overlay hidden" id="setup-modal">
+    <div class="modal">
+      <div class="modal-logo">℞</div>
+      <h2>Welcome to PrescribeRx</h2>
+      <p class="modal-subtitle">Set up your profile to get started</p>
+      <div class="form-grid">
+        <div class="form-group full-width">
+          <label>Your Full Name *</label>
+          <input type="text" id="setup-name" placeholder="Dr. Full Name">
+        </div>
+        <div class="form-group">
+          <label>Qualifications</label>
+          <input type="text" id="setup-qual" placeholder="MBBS, MD">
+        </div>
+        <div class="form-group">
+          <label>Specialization</label>
+          <input type="text" id="setup-spec" placeholder="General Medicine">
+        </div>
+        <div class="form-group full-width">
+          <label>Clinic / Hospital Name</label>
+          <input type="text" id="setup-clinic" placeholder="City Hospital">
+        </div>
+        <div class="form-group full-width">
+          <label>Registration Number</label>
+          <input type="text" id="setup-reg" placeholder="State Medical Council Reg No.">
+        </div>
+      </div>
+      <button id="btn-setup-save" class="btn-primary">Get Started →</button>
+    </div>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script src="medicines.js"></script>
+  <script src="app.js"></script>
+
+</body>
+</html>
