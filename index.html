@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PrescribeRx — Smart Prescription App for Doctors</title>
-  <meta name="description" content="Professional e-Prescription app for doctors. Create, manage, and print prescriptions with intelligent medicine search and Indian brand name support.">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='80' font-size='80'>℞</text></svg>">
+  <meta name="description"
+    content="Professional e-Prescription app for doctors. Create, manage, and print prescriptions with intelligent medicine search and Indian brand name support.">
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='80' font-size='80'>℞</text></svg>">
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
 
   <div id="app">
@@ -78,95 +82,88 @@
       <!-- THE PRESCRIPTION PAD -->
       <div class="prescription-pad" id="prescription-pad">
 
-        <!-- LEFT PANEL — Clinic Sidebar -->
-        <aside class="clinic-panel">
-          <div class="clinic-header">
-            <div class="clinic-logo-area">
-              <span class="clinic-logo-icon">🏥</span>
-              <div>
-                <input type="text" class="edit-field clinic-name" id="rx-clinic-name" value="" placeholder="Hospital / Clinic Name">
-                <input type="text" class="edit-field clinic-tagline" id="rx-clinic-tagline" value="" placeholder="Your tagline here">
-              </div>
-            </div>
-          </div>
-
-          <!-- Doctor Info -->
-          <div class="clinic-section" id="doctor-section">
-            <div class="doctor-entry">
-              <input type="text" class="edit-field doctor-name" id="rx-doctor-name" value="" placeholder="Dr. Full Name">
-              <input type="text" class="edit-field doctor-spec" id="rx-doctor-spec" value="" placeholder="Specialization">
-              <input type="text" class="edit-field doctor-qual" id="rx-doctor-qual" value="" placeholder="MBBS, MD, etc.">
-              <input type="text" class="edit-field doctor-reg" id="rx-doctor-reg" value="" placeholder="Reg. No: XXXXX">
-            </div>
-          </div>
-
-          <!-- Timing -->
-          <div class="clinic-section">
-            <h4>Timing</h4>
-            <textarea class="edit-field" id="rx-timing" rows="4" placeholder="Mon - Fri&#10;9:00 AM - 1:00 PM&#10;5:00 PM - 8:00 PM&#10;&#10;Sat&#10;9:00 AM - 1:00 PM"></textarea>
-          </div>
-
-          <!-- Contact -->
-          <div class="clinic-section">
-            <h4>Contact</h4>
-            <input type="text" class="edit-field" id="rx-phone" placeholder="Phone number">
-            <input type="text" class="edit-field" id="rx-emergency" placeholder="Emergency number">
-            <input type="text" class="edit-field" id="rx-ambulance" placeholder="Ambulance number">
-          </div>
-
-          <!-- Address -->
-          <div class="clinic-section">
-            <h4>Address</h4>
-            <textarea class="edit-field" id="rx-address" rows="3" placeholder="Clinic address..."></textarea>
-          </div>
-        </aside>
-
-        <!-- RIGHT PANEL — Prescription Body -->
+        <!-- PRESCRIPTION BODY -->
         <main class="rx-body">
-          <!-- Date -->
-          <div class="rx-top-bar">
-            <div class="rx-date">
-              <label>Date:</label>
-              <input type="date" id="rx-date" class="edit-field">
+          <button id="btn-print-pad" class="btn-print-floating" onclick="window.print()" title="Print Prescription">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z">
+              </path>
+            </svg>
+            Print
+          </button>
+
+          <!-- CUSTOM HEADER -->
+          <div class="rx-custom-header">
+            <div class="rx-header-logo-container">
+              <!-- Please save the uploaded image as 'logo.jpg' in the same folder as this index.html -->
+              <img src="logo.png" alt="Mikky Megha Logo" class="rx-header-logo-img" />
+            </div>
+            <div class="rx-header-details">
+              <h1 class="h-title">Mikky Megha Hospital Pvt. Ltd.</h1>
+              <p>Chhotparua, Karnajora, Raiganj, Uttar Dinajpur, PIN- 733130, West Bengal</p>
+              <p>Contact No.: 8653870222</p>
+              <p>Email: hr.mikkymeghahospitals@gmail.com</p>
+              <p>Website: www.mikkymeghahospital.com</p>
             </div>
           </div>
 
-          <!-- Patient Info -->
-          <div class="patient-info">
-            <div class="patient-row">
+          <hr class="rx-divider" />
+
+          <!-- Date -->
+          <!-- Info Grid (Patient on Left, Doctor on Right) -->
+          <div class="rx-info-grid rx-section">
+            <button type="button" class="btn-print-toggle"
+              onclick="this.closest('.rx-section').classList.toggle('no-print')" title="Toggle Print"
+              style="position: absolute; right: 0; top: 0; z-index: 10;">🖨️</button>
+
+            <!-- Left: Patient Info -->
+            <div class="patient-info">
               <div class="patient-field">
-                <label>Name:</label>
-                <input type="text" id="rx-patient-name" class="edit-field" placeholder="Patient Full Name">
+                <label>Patient:</label>
+                <input type="text" id="rx-patient-name" class="edit-field" placeholder="Patient Full Name"
+                  style="font-weight: bold; width: 200px;">
               </div>
-              <div class="patient-field patient-field-small">
-                <label>Age:</label>
-                <input type="text" id="rx-patient-age" class="edit-field" placeholder="--">
-              </div>
-            </div>
-            <div class="patient-row">
-              <div class="patient-field patient-field-small">
-                <label>Sex:</label>
-                <select id="rx-patient-sex" class="edit-field">
-                  <option value="">Select</option>
+              <div class="patient-field">
+                <label>Age/Sex:</label>
+                <input type="text" id="rx-patient-age" class="edit-field" placeholder="Age" style="width: 50px;"> /
+                <select id="rx-patient-sex" class="edit-field" style="width: 80px;">
+                  <option value="">Sex</option>
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
                   <option value="Other">Other</option>
                 </select>
               </div>
-              <div class="patient-field patient-field-small">
-                <label>Weight:</label>
-                <input type="text" id="rx-patient-weight" class="edit-field" placeholder="kg">
+              <div class="patient-field">
+                <label>Weight/Height:</label>
+                <input type="text" id="rx-patient-weight" class="edit-field" placeholder="Wt" style="width: 50px;"> /
+                <input type="text" id="rx-patient-height" class="edit-field" placeholder="Ht" style="width: 60px;">
               </div>
-              <div class="patient-field patient-field-small">
-                <label>Height:</label>
-                <input type="text" id="rx-patient-height" class="edit-field" placeholder="cm">
+              <div class="patient-field">
+                <label>Date:</label>
+                <input type="date" id="rx-date" class="edit-field">
               </div>
+            </div>
+
+            <!-- Right: Doctor Info -->
+            <div class="doctor-info">
+              <input type="text" class="edit-field doc-name" placeholder="Dr. Name"
+                style="font-weight: bold; font-size: 15px; width: 220px; text-align: right;">
+              <input type="text" class="edit-field doc-degree" placeholder="Qualifications"
+                style="font-size: 13px; width: 220px; text-align: right;">
+              <input type="text" class="edit-field doc-reg" placeholder="Reg No."
+                style="font-size: 12px; width: 220px; text-align: right;">
             </div>
           </div>
 
           <!-- Vitals -->
-          <div class="rx-vitals">
-            <span class="rx-vitals-title">Vitals</span>
+          <div class="rx-vitals rx-section">
+            <div
+              style="width: 100%; display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span class="rx-vitals-title" style="margin-bottom: 0;">Vitals</span>
+              <button type="button" class="btn-print-toggle"
+                onclick="this.closest('.rx-section').classList.toggle('no-print')" title="Toggle Print">🖨️</button>
+            </div>
             <div class="vital-field">
               <label>BP:</label>
               <input type="text" class="edit-field" id="rx-bp" placeholder="120/80">
@@ -186,16 +183,32 @@
           </div>
 
           <!-- Diagnosis -->
-          <div class="rx-diagnosis">
-            <label>Diagnosis / Chief Complaints:</label>
-            <textarea id="rx-diagnosis" class="edit-field" placeholder="Enter diagnosis or chief complaints..." rows="2"></textarea>
+          <div class="rx-diagnosis rx-section">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <label>Diagnosis / Chief Complaints:</label>
+              <button type="button" class="btn-print-toggle"
+                onclick="this.closest('.rx-section').classList.toggle('no-print')" title="Toggle Print">🖨️</button>
+            </div>
+            <textarea id="rx-diagnosis" class="edit-field" placeholder="Enter diagnosis or chief complaints..."
+              rows="2"></textarea>
           </div>
 
-          <!-- Rx Symbol -->
-          <div class="rx-symbol">℞</div>
+          <!-- Rx Symbol & Medicines Section -->
+          <div class="rx-symbol rx-section" style="display: flex; justify-content: space-between; align-items: center;">
+            <span>℞</span>
+            <button type="button" class="btn-print-toggle"
+              onclick="this.closest('.rx-section').nextElementSibling.classList.toggle('no-print'); this.closest('.rx-section').classList.toggle('no-print')"
+              title="Toggle Print">🖨️</button>
+          </div>
 
           <!-- Medicines Section -->
-          <div class="medicines-section">
+          <div class="medicines-section rx-section">
+            <div class="print-med-header">
+              <div class="h-med">Medicine</div>
+              <div class="h-dose">Dosage</div>
+              <div class="h-dur">Duration</div>
+              <div class="h-inst">Instructions</div>
+            </div>
             <div id="medicine-list">
               <!-- Medicine rows added dynamically by app.js -->
             </div>
@@ -203,14 +216,23 @@
           </div>
 
           <!-- Advice -->
-          <div class="rx-advice">
-            <label>Advice / Instructions:</label>
-            <textarea id="rx-advice" class="edit-field" placeholder="Diet, rest, investigations, lifestyle advice..." rows="2"></textarea>
+          <div class="rx-advice rx-section">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <label>Advice / Instructions:</label>
+              <button type="button" class="btn-print-toggle"
+                onclick="this.closest('.rx-section').classList.toggle('no-print')" title="Toggle Print">🖨️</button>
+            </div>
+            <textarea id="rx-advice" class="edit-field" placeholder="Diet, rest, investigations, lifestyle advice..."
+              rows="2"></textarea>
           </div>
 
           <!-- Follow-up -->
-          <div class="rx-followup">
-            <label>Follow-up:</label>
+          <div class="rx-followup rx-section">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <label>Follow-up:</label>
+              <button type="button" class="btn-print-toggle"
+                onclick="this.closest('.rx-section').classList.toggle('no-print')" title="Toggle Print">🖨️</button>
+            </div>
             <input type="date" id="rx-followup" class="edit-field">
           </div>
 
@@ -319,7 +341,8 @@
           </div>
           <div class="form-group full-width">
             <label>Timing</label>
-            <textarea id="set-clinic-timing" rows="3" placeholder="Mon - Fri: 9 AM - 1 PM, 5 PM - 8 PM&#10;Sat: 9 AM - 1 PM"></textarea>
+            <textarea id="set-clinic-timing" rows="3"
+              placeholder="Mon - Fri: 9 AM - 1 PM, 5 PM - 8 PM&#10;Sat: 9 AM - 1 PM"></textarea>
           </div>
           <div class="form-group">
             <label>Phone</label>
@@ -384,4 +407,5 @@
   <script src="app.js"></script>
 
 </body>
+
 </html>

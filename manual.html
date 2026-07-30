@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blank Manual Prescription Pad</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Add a minimal reset for this page if viewed outside the main app context */
+    body {
+      background: #e9ecef;
+      padding: 40px 20px;
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+
+    @media print {
+      body {
+        background: #fff;
+        padding: 0;
+      }
+
+      .btn-print-floating {
+        display: none !important;
+      }
+
+      /* Force bottom borders on fields so they print as blank lines for writing */
+      .patient-info .edit-field,
+      .rx-vitals .edit-field {
+        border-bottom: 1px dashed #000 !important;
+        border-radius: 0 !important;
+      }
+
+      /* Keep doctor info without borders if they choose to pre-fill it */
+      .doctor-info .edit-field {
+        border-bottom: none !important;
+      }
+    }
+
+    /* Ensure the print button looks nice */
+    .btn-print-floating {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 1000;
+      padding: 16px 24px;
+      background-color: var(--primary, #2563eb);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      font-weight: bold;
+      font-size: 16px;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .btn-print-floating:hover {
+      background-color: #1d4ed8;
+      transform: translateY(-2px);
+    }
+
+    /* Blank lines for writing */
+    .blank-line {
+      display: inline-block;
+      border-bottom: 1px dashed #000;
+      height: 20px;
+      margin-left: 4px;
+    }
+
+    .blank-line.solid {
+      border-bottom: 1px solid #000;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Floating Print Button (hidden during print) -->
+  <!-- <button class="btn-print-floating" onclick="window.print()" title="Print Blank Pad">
+    🖨️ Print Blank Pad
+  </button> -->
+
+  <div class="prescription-pad" id="prescription-pad">
+    <main class="rx-body">
+      <!-- CUSTOM HEADER -->
+      <div class="rx-custom-header">
+        <div class="rx-header-logo-container">
+          <img src="logo.png" alt="Mikky Megha Logo" class="rx-header-logo-img" />
+        </div>
+        <div class="rx-header-details">
+          <h1 class="h-title">Mikky Megha Hospital Pvt. Ltd.</h1>
+          <p>Chhotparua, Karnajora, Raiganj, Uttar Dinajpur, PIN- 733130, West Bengal</p>
+          <p>Contact No.: 8653870222</p>
+          <p>Email: hr.mikkymeghahospitals@gmail.com</p>
+          <p>Website: www.mikkymeghahospital.com</p>
+        </div>
+      </div>
+
+      <hr class="rx-divider" />
+
+      <!-- Info Grid (Patient on Left, Doctor on Right) -->
+      <div class="rx-info-grid rx-section">
+
+        <!-- Left: Patient Info -->
+        <div class="patient-info">
+          <div class="patient-field">
+            <label>Patient Name:</label>
+            <span class="blank-line" style="width: 250px;"></span>
+          </div>
+          <div class="patient-field">
+            <label>Age/Sex:</label>
+            <span class="blank-line" style="width: 50px;"></span> /
+            <span class="blank-line" style="width: 80px;"></span>
+          </div>
+          <div class="patient-field">
+            <label>Weight/Height:</label>
+            <span class="blank-line" style="width: 50px;"></span> /
+            <span class="blank-line" style="width: 60px;"></span>
+          </div>
+          <div class="patient-field">
+            <label>Date:</label>
+            <span class="blank-line" style="width: 120px;"></span>
+          </div>
+        </div>
+
+        <!-- Right: Doctor Info -->
+        <div class="doctor-info">
+          <input type="text" class="edit-field doc-name" placeholder="Dr. Name"
+            style="font-weight: bold; font-size: 15px; width: 220px; text-align: right;">
+          <input type="text" class="edit-field doc-degree" placeholder="Qualifications"
+            style="font-size: 13px; width: 220px; text-align: right;">
+          <input type="text" class="edit-field doc-degree" placeholder="Details"
+            style="font-size: 13px; width: 340px; text-align: right;">
+          <input type="text" class="edit-field doc-degree" placeholder="Details"
+            style="font-size: 13px; width: 340px; text-align: right;">
+          <input type="text" class="edit-field doc-reg" placeholder="Reg No."
+            style="font-size: 12px; width: 220px; text-align: right;">
+        </div>
+      </div>
+
+      <!-- Body Split Layout -->
+      <div style="display: flex; flex: 1; min-height: 500px; margin-top: 16px;">
+
+        <!-- Left Sidebar: Vitals (Vertical) -->
+        <div
+          style="width: 80px; border-right: 1px solid #000; padding-right: 16px; margin-right: 16px; display: flex; flex-direction: column; gap: 24px; padding-top: 24px;">
+          <div class="vital-field" style="display: flex; flex-direction: column; gap: 4px;">
+            <label>BP:</label>
+          </div>
+          <div class="vital-field" style="display: flex; flex-direction: column; gap: 4px;">
+            <label>Pulse:</label>
+          </div>
+          <div class="vital-field" style="display: flex; flex-direction: column; gap: 4px;">
+            <label>Temp:</label>
+          </div>
+          <div class="vital-field" style="display: flex; flex-direction: column; gap: 4px;">
+            <label>SpO2:</label>
+          </div>
+        </div>
+
+        <!-- Right Side: Blank Writing Area with Rx Symbol -->
+        <div style="flex: 1; display: flex; flex-direction: column;">
+          <div class="rx-symbol" style="margin-top: 12px;">
+            <span style="font-size: 32px; font-weight: bold; font-family: serif; color: #000;">℞</span>
+          </div>
+          <div class="blank-writing-area" style="flex: 1; width: 100%;"></div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</body>
+
+</html>

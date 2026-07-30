@@ -512,8 +512,7 @@ button {
    PRESCRIPTION PAD — THE MAIN FEATURE
    ======================================== */
 .prescription-pad {
-  display: grid;
-  grid-template-columns: 280px 1fr;
+  display: block;
   background: var(--rx-body-bg);
   border-radius: var(--radius-lg);
   overflow: hidden;
@@ -524,159 +523,104 @@ button {
   margin: 0 auto;
 }
 
-/* LEFT PANEL — Clinic Info */
-.clinic-panel {
-  background: linear-gradient(180deg, var(--rx-sidebar) 0%, var(--rx-sidebar-dark) 100%);
-  color: var(--rx-sidebar-text);
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  overflow: hidden;
-}
+/* Left panel removed */
 
-.clinic-panel::before {
-  content: '';
-  position: absolute;
-  top: -40px;
-  right: -60px;
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  background: var(--rx-gold);
-  opacity: 0.15;
-}
-
-.clinic-panel::after {
-  content: '';
-  position: absolute;
-  top: 60px;
-  right: -30px;
-  width: 100px;
-  height: 100px;
-  border: 3px solid var(--rx-gold);
-  border-radius: 50%;
-  opacity: 0.1;
-}
-
-.clinic-header {
-  padding: 24px 20px 16px;
-  position: relative;
-  z-index: 1;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-}
-
-.clinic-logo-area {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-}
-
-.clinic-logo-icon {
-  font-size: 32px;
-  line-height: 1;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
-}
-
-.clinic-header .edit-field.clinic-name {
-  color: #fff;
-  font-size: 18px;
-  font-weight: 700;
-  font-family: var(--font-rx);
-  width: 100%;
-  border-bottom: 1px dashed rgba(255,255,255,0.2);
-  padding: 2px 0;
-  margin-bottom: 2px;
-}
-
-.clinic-header .edit-field.clinic-tagline {
-  color: var(--rx-gold-light);
-  font-size: 11px;
-  font-weight: 400;
-  font-style: italic;
-  width: 100%;
-  border-bottom: 1px dashed rgba(255,255,255,0.1);
-  padding: 2px 0;
-}
-
-.clinic-section {
-  padding: 14px 20px;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-  position: relative;
-  z-index: 1;
-}
-
-.clinic-section h4 {
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  color: var(--rx-gold-light);
-  margin-bottom: 8px;
-  font-weight: 600;
-}
-
-.clinic-panel .edit-field {
-  color: rgba(255,255,255,0.9);
-  font-size: 12px;
-  width: 100%;
-  border-bottom: 1px dashed rgba(255,255,255,0.1);
-  padding: 3px 0;
-  transition: border-color var(--transition-fast);
-  line-height: 1.5;
-  background: transparent;
-}
-
-.clinic-panel .edit-field:focus {
-  border-bottom-color: var(--rx-gold);
-}
-
-.clinic-panel .edit-field::placeholder {
-  color: rgba(255,255,255,0.3);
-}
-
-.clinic-panel textarea.edit-field {
-  resize: none;
-  min-height: 50px;
-  font-size: 11px;
-  line-height: 1.6;
-}
-
-.doctor-entry {
-  margin-bottom: 12px;
-}
-
-.doctor-entry .edit-field.doctor-name {
-  font-size: 14px;
-  font-weight: 700;
-  margin-bottom: 1px;
-}
-
-.doctor-entry .edit-field.doctor-spec,
-.doctor-entry .edit-field.doctor-qual,
-.doctor-entry .edit-field.doctor-reg {
-  font-size: 11px;
-  color: rgba(255,255,255,0.7);
-}
-
-/* RIGHT PANEL — Prescription Body */
+/* PRESCRIPTION BODY */
 .rx-body {
-  padding: 28px 32px;
+  padding: 32px 48px;
   display: flex;
   flex-direction: column;
   color: var(--rx-body-text);
   position: relative;
 }
 
+/* Print Button Floating */
+.btn-print-floating {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: #f1f5f9;
+  color: #334155;
+  border: 1px solid #cbd5e1;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.btn-print-floating:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+/* Custom Header */
+.rx-custom-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.rx-header-logo-img {
+  max-width: 140px;
+  height: auto;
+  display: block;
+}
+
+.rx-header-logo-container {
+  flex: 0 0 auto;
+}
+
+.rx-header-details {
+  flex: 1;
+  text-align: right;
+  padding-left: 24px;
+}
+
+.rx-header-details p {
+  color: #144ba3;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  margin: 2px 0;
+}
+
+.rx-header-details h1.h-title {
+  color: #144ba3;
+  font-size: 26px;
+  font-weight: 800;
+  margin-bottom: 6px;
+  letter-spacing: -0.5px;
+}
+
+.rx-divider {
+  border: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #144ba3 0%, #144ba3 70%, #d52a2a 70%, #d52a2a 100%);
+  margin-bottom: 24px;
+}
+
 /* Watermark */
 .rx-body::before {
-  content: '℞';
+  content: '';
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 300px;
-  font-family: var(--font-rx);
-  color: rgba(26, 71, 49, 0.03);
+  width: 400px;
+  height: 400px;
+  background-image: url('logo.jpeg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.06;
   pointer-events: none;
   z-index: 0;
 }
@@ -730,13 +674,35 @@ button {
   appearance: auto;
 }
 
-/* Patient Info */
-.patient-info {
+/* Info Grid (Patient & Doctor) */
+.rx-info-grid {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
   margin-bottom: 16px;
   position: relative;
   z-index: 1;
   padding-bottom: 16px;
   border-bottom: 1px solid var(--rx-border);
+}
+
+.patient-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.doctor-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-end;
+}
+
+.patient-field {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
 }
 
 .patient-row {
@@ -760,6 +726,33 @@ button {
 .patient-field .edit-field {
   flex: 1;
   min-width: 0;
+}
+
+/* Print Toggle Button */
+.btn-print-toggle {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  opacity: 0.4;
+  transition: opacity 0.2s, filter 0.2s;
+  padding: 4px;
+}
+.btn-print-toggle:hover {
+  opacity: 1;
+}
+.rx-section {
+  transition: opacity 0.3s, background-color 0.3s;
+  position: relative;
+}
+.rx-section.no-print {
+  opacity: 0.4;
+  background-color: rgba(0,0,0,0.02);
+  border-radius: var(--radius-sm);
+}
+.rx-section.no-print .btn-print-toggle {
+  opacity: 1;
+  filter: grayscale(1) opacity(0.5);
 }
 
 /* Vitals */
@@ -844,6 +837,10 @@ button {
 /* ========================================
    MEDICINE ROWS
    ======================================== */
+.print-med-header {
+  display: none; /* hidden on screen */
+}
+
 .medicines-section {
   position: relative;
   z-index: 2;
@@ -1617,7 +1614,7 @@ button {
    PRINT STYLES
    ======================================== */
 @media print {
-  *, *::before, *::after {
+  * {
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
     color-adjust: exact !important;
@@ -1639,7 +1636,9 @@ button {
   .modal-overlay,
   #view-dashboard,
   #view-medicines,
-  #view-settings {
+  #view-settings,
+  .btn-print-floating,
+  .btn-print-toggle {
     display: none !important;
   }
 
@@ -1649,20 +1648,46 @@ button {
     margin: 0 !important;
   }
 
+  /* ========================================
+     PRINT LAYOUT & STRUCTURE
+     ======================================== */
+  html, body {
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
   .prescription-pad {
     box-shadow: none !important;
     border-radius: 0 !important;
     max-width: none !important;
-    min-height: auto !important;
-    border: 1px solid #ccc;
+    min-height: 100vh !important;
+    border: none !important;
+    margin: 0 !important;
+    padding: 15mm !important; /* Compensate for removed @page margin */
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
   }
 
-  .clinic-panel {
-    background: var(--rx-sidebar) !important;
-    -webkit-print-color-adjust: exact;
+  .rx-body {
+    padding: 0 !important;
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
   }
 
-  .clinic-panel .edit-field,
+  /* Hide placeholders and default icons */
+  ::placeholder {
+    color: transparent !important;
+  }
+  ::-webkit-calendar-picker-indicator {
+    display: none !important;
+  }
+
+  /* Clean inputs */
   .rx-body .edit-field,
   .rx-body textarea,
   .rx-body select,
@@ -1677,46 +1702,256 @@ button {
     border-bottom: none !important;
     box-shadow: none !important;
     background: transparent !important;
-    padding-left: 0 !important;
+    padding: 0 !important;
     appearance: none !important;
     -webkit-appearance: none !important;
+    resize: none !important;
+    color: #000 !important;
   }
 
+  /* Date Bar */
+  .rx-top-bar {
+    margin-bottom: 20px !important;
+    border-bottom: 2px solid #000 !important;
+    padding-bottom: 8px !important;
+  }
+  
+  /* Info Grid */
+  .rx-info-grid {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important;
+    border-bottom: 1px solid #ff0000 !important; /* Red line like in image */
+    margin-bottom: 20px !important;
+    padding-bottom: 8px !important;
+  }
+  
+  .patient-info {
+    border: none !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 4px !important;
+  }
+  
+  .doctor-info {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 4px !important;
+    align-items: flex-end !important;
+  }
+
+  .patient-field {
+    display: flex !important;
+    align-items: baseline !important;
+    gap: 6px !important;
+    white-space: nowrap !important;
+  }
+  .patient-field label {
+    font-weight: 700 !important;
+    color: #000 !important;
+  }
+  .patient-field .edit-field {
+    min-width: 0 !important;
+    font-weight: 500 !important;
+  }
+  
+  /* Compact widths for print */
+  #rx-patient-name { width: auto !important; }
+  #rx-patient-age { width: 1.5em !important; }
+  #rx-patient-sex { width: 3.5em !important; }
+  #rx-patient-weight { width: 2em !important; }
+  #rx-patient-height { width: 2.5em !important; }
+
+  /* Vitals Section */
+  .rx-vitals {
+    border: none !important;
+    margin-bottom: 20px !important;
+    display: flex !important;
+    gap: 24px !important;
+    background: #f9f9f9 !important;
+    padding: 8px 12px !important;
+    border-radius: 4px !important;
+  }
+  .rx-vitals-title {
+    font-weight: bold !important;
+    color: #000 !important;
+    width: auto !important;
+    margin-right: 12px !important;
+  }
+  .vital-field {
+    display: flex !important;
+    align-items: baseline !important;
+    gap: 4px !important;
+  }
+  .vital-field label {
+    font-weight: bold !important;
+    color: #555 !important;
+  }
+
+  /* Section Headers (Diagnosis, Advice, Follow-up) */
+  .rx-diagnosis label,
+  .rx-advice label,
+  .rx-followup label {
+    display: block !important;
+    font-weight: 700 !important;
+    font-size: 15px !important;
+    color: #000 !important;
+    text-transform: uppercase !important;
+    margin-bottom: 4px !important;
+    border-bottom: 1px solid #ccc !important;
+    padding-bottom: 2px !important;
+  }
+
+  .rx-diagnosis textarea,
+  .rx-advice textarea {
+    margin-top: 4px !important;
+    min-height: auto !important;
+  }
+
+  /* Medicine Section */
+  .medicines-section {
+    margin: 24px 0 !important;
+    position: relative !important;
+  }
+  
+  .rx-symbol {
+    margin-bottom: 16px !important;
+  }
+
+  .print-med-header {
+    display: none !important;
+  }
+  
   .medicine-row {
     background: transparent !important;
     border: none !important;
-    border-bottom: 1px solid #ddd !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
-    padding: 8px 0 !important;
+    padding: 12px 0 !important;
+    margin-bottom: 8px !important;
+    page-break-inside: avoid;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 6px !important;
+    border-bottom: 1px solid #eee !important;
+  }
+
+  .med-row-top {
+    display: flex !important;
+    align-items: baseline !important;
+    gap: 8px !important;
+    font-size: 15px !important;
+  }
+
+  .med-row-bottom {
+    display: flex !important;
+    align-items: center !important;
+    gap: 20px !important;
+    padding-left: 24px !important; /* Indent perfectly under the number */
+    font-size: 13px !important;
+    color: #444 !important;
+  }
+
+  /* Medicine Top Row fields (merged into column 1 via grid positioning) */
+  .med-row-top {
+    /* We don't want top and bottom to be separate flexboxes anymore, they dump children to grid */
+  }
+
+  /* Wrap the first column elements logically if we could, but since they are loose, 
+     we can wrap them in a flex container inside the HTML? No, we can just use flex inside the first column IF we group them.
+     Wait, if med-row-top is display: flex, it occupies ONE grid cell! That's PERFECT! */
+  .med-row-top {
+    display: flex !important;
+    align-items: baseline !important;
+    gap: 8px !important;
+    font-size: 14px !important;
+    grid-column: 1 !important;
+  }
+
+  .med-row-bottom {
+    display: contents !important;
+  }
+
+  .med-number { font-weight: bold !important; color: #000 !important; }
+  .med-form { font-weight: 600 !important; color: #333 !important; max-width: 60px !important; }
+  .med-search-container { flex: 0 1 auto !important; }
+  .med-name-input { font-weight: bold !important; font-size: 15px !important; color: #000 !important; }
+  .med-strength { font-weight: bold !important; color: #444 !important; }
+
+  /* Map bottom row elements back to normal flex layout */
+  .med-dose { display: none !important; } /* Hide redundant dose if freq is enough */
+  
+  .med-freq,
+  .med-duration,
+  .med-instruction { 
+    display: flex !important; 
+    align-items: center !important; 
+    gap: 4px !important; 
+  }
+  
+  .med-row-bottom label {
+    display: inline-block !important;
+    font-weight: 600 !important;
+    color: #666 !important;
+    margin-right: 2px !important;
   }
 
   .freq-btn {
-    border: 1px solid #999 !important;
-    background: #fff !important;
-    color: #999 !important;
+    border: none !important;
+    background: transparent !important;
+    color: #000 !important;
+    padding: 0 2px !important;
   }
-
+  .freq-btn:not(.active) {
+    display: none !important;
+  }
   .freq-btn.active {
-    background: #1a4731 !important;
-    color: #fff !important;
-    border-color: #1a4731 !important;
+    font-weight: 800 !important;
+    font-size: 13px !important;
   }
 
-  .btn-add-med { display: none !important; }
+  /* Signatures & Footer */
+  .rx-footer {
+    margin-top: auto !important; /* Pushes to the bottom of the full-height page */
+    padding-bottom: 20px !important;
+    page-break-inside: avoid;
+  }
+  
+  .rx-signature {
+    float: right !important;
+    text-align: center !important;
+    width: 250px !important;
+  }
+  
+  .signature-line {
+    border-bottom: 1px solid #000 !important;
+    margin-bottom: 8px !important;
+  }
 
   .rx-disclaimer {
-    background: var(--rx-sidebar) !important;
-    color: #fff !important;
+    clear: both !important;
+    background: transparent !important;
+    color: #888 !important;
+    text-align: center;
+    border-top: 1px solid #eee;
+    padding-top: 12px;
+    margin-top: 40px !important;
+    font-size: 11px !important;
   }
 
   .rx-body::before {
-    opacity: 0.02 !important;
-    font-size: 200px !important;
+    opacity: 0.08 !important;
   }
 
   @page {
     size: A4;
-    margin: 10mm;
+    margin: 0; /* Setting margin to 0 hides default browser headers/footers (date, url, etc) */
+  }
+
+  /* CRITICAL: Overrides all other styles if element has .no-print */
+  .no-print, 
+  .rx-section.no-print,
+  .rx-vitals.no-print {
+    display: none !important;
   }
 }
