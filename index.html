@@ -35,6 +35,9 @@
         <button data-view="settings" class="nav-btn" id="nav-settings">
           <i>⚙️</i> <span>Settings</span>
         </button>
+        <a href="manual.html" class="nav-btn" id="nav-manual" style="text-decoration: none;">
+          <i>📋</i> <span>Manual Pad</span>
+        </a>
       </nav>
     </header>
 
@@ -42,7 +45,10 @@
     <section id="view-dashboard" class="view active">
       <div class="dashboard-header">
         <h2>Welcome, <span id="doctor-name-display">Doctor</span></h2>
-        <button id="btn-new-rx" class="btn-primary btn-large">+ New Prescription</button>
+        <div style="display: flex; gap: 10px;">
+          <a href="manual.html" class="btn-secondary btn-large" style="text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">📋 Manual Pad</a>
+          <button id="btn-new-rx" class="btn-primary btn-large">+ New Prescription</button>
+        </div>
       </div>
 
       <div class="stats-grid">
